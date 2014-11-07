@@ -5,11 +5,11 @@ include('shared.lua')
  
 function ENT:Initialize()
  
-	self:SetModel( "models/props_lab/tpplug.mdl" )
+	self:SetModel( table.Random(cabinetConfig.models) )
 	self:PhysicsInit( SOLID_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	-- disable the movement of the entity
-	self:SetMoveType( MOVETYPE_VPHYSICS )
+	self:SetMoveType( MOVETYPE_NONE )
 	
 	self:SetUseType( SIMPLE_USE )
 	
