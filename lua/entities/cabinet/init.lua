@@ -11,7 +11,6 @@ function ENT:Initialize()
 	-- disable the movement of the entity
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetUseType( SIMPLE_USE )
-	self:SetCustomCollisionCheck( true )
 
 end
 
