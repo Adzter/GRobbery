@@ -10,9 +10,9 @@ function ENT:Initialize()
 	self:SetSolid( SOLID_VPHYSICS )
 	-- disable the movement of the entity
 	self:SetMoveType( MOVETYPE_VPHYSICS )
-	
 	self:SetUseType( SIMPLE_USE )
-	
+	self:SetCustomCollisionCheck( true )
+
 end
  
 function ENT:Use( activator, caller )
