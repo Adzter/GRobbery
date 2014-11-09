@@ -17,13 +17,14 @@ end
 local inProgress = false
 function ENT:Touch( entity )
 	if entity:GetClass() == "drill" and not inProgress then
-		inProgress = true
+		local inProgress = true
 		entity:SetPos( self:LocalToWorld( Vector(14, 0, 0) ) )
 		entity:SetAngles( self:GetAngles() )
 		entity:SetMoveType( MOVETYPE_NONE )
 		
-		local drillSounds = CreateSound( entity, "npigamers/drill.mp3" )
+		local drillSounds = CreateSound( entity, "npigamers/drill.wav" )
 		drillSounds:Play()
+		
 		
 		timer.Create( "sparks" .. entity:EntIndex(), 1, 0, function() 
 			local effectdata = EffectData()

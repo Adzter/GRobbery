@@ -1,1 +1,1 @@
-resource.AddFile("sound/npigamers/drill.mp3")
+resource.AddFile("sound/npigamers/drill.wav")
