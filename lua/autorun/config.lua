@@ -1,4 +1,3 @@
-AddCSLuaFile()
 drillConfig = {}
 cabinetConfig = {}
 
@@ -13,10 +12,10 @@ cabinetConfig = {}
 --]]
 
 drillConfig.duration = 360
---With the above config you can also use math.Randomnto specify a 
+--With the above config you can also use math.Randomn to specify a 
 --random value to drill for, example being math.random( 240, 360 )
  
-drillConfig.enableJamming = true -- Enables/disables the jamming of the drill
+drillConfig.enableJamming = true      -- Enables/disables the jamming of the drill
 drillConfig.drillingText = "DRILLING" -- Text to show when drilling
 drillConfig.errorText = "ERROR: JAM"  -- Text to show when the drill gets stuck
 
