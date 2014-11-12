@@ -27,7 +27,6 @@ function ENT:Touch( entity )
 		timer.Create( "countdown" .. entity:EntIndex(), 1, 0, function() 
 			if entity:GetNWInt( "drillTimer" ) < 1 then
 				-- Add in reward code here
-				entity:Remove()
 			end
 
 			local effectdata = EffectData()
