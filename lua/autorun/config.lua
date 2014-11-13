@@ -17,6 +17,7 @@ drillConfig.drillingText = "DRILLING" -- Text to show when drilling
 drillConfig.errorText = "ERROR: JAM"  -- Text to show when the drill gets stuck
 drillConfig.backgroundColor = Color(50, 90, 255, 50 ) -- In the format Red/Green/Blue/Alpha
 drillConfig.progressBarColor = Color(255, 255, 25, 255 ) -- In the format Red/Green/Blue/Alpha
+drillConfig.progressBarBackgroundColor = Color(90, 90, 255, 255 ) -- In the format Red/Green/Blue/Alpha
 drillConfig.textColor = Color(255, 255, 255, 255) -- In the format Red/Green/Blue/Alpha
 
 --[[
