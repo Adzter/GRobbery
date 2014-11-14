@@ -25,18 +25,32 @@ function ENT:Touch( entity )
 		entity:SetNWBool( "isDrilling", true )
 		
 		timer.Create( "countdown" .. entity:EntIndex(), 1, 0, function() 
+			--Check if timer is less than 1, if it is then the drill is finished
 			if entity:GetNWInt( "drillTimer" ) < 1 then
-				-- Add in reward code here
+			
+				-- Do a loop with the amount of rewards to spawn
+				for i = 1,cabinetConfig.rewardsAmount do
+					-- Get a random reward from the table and spawn it
+					local reward = ents.Create( table.Random(cabinetConfig.rewards) )
+					reward:SetPos( entity:GetPos() )
+					reward:Spawn()
+				end
+			
+				-- kill the timer and remove the drill
+				timer.Destroy( "countdown" .. entity:EntIndex() )
+				entity:Remove()
 			end
+	
+			if entity then
+				local effectdata = EffectData()
+				effectdata:SetOrigin( entity:GetPos() )
+				effectdata:SetMagnitude( 3 )
+				effectdata:SetRadius( 10 )
+				util.Effect( "Sparks", effectdata, true, true )
 
-			local effectdata = EffectData()
-			effectdata:SetOrigin( entity:GetPos() )
-			effectdata:SetMagnitude( 3 )
-			effectdata:SetRadius( 10 )
-			util.Effect( "Sparks", effectdata, true, true )
-
-			local newTimer = entity:GetNWInt( "drillTimer" ) - 1
-			entity:SetNWInt( "drillTimer", newTimer )
+				local newTimer = entity:GetNWInt( "drillTimer" ) - 1
+				entity:SetNWInt( "drillTimer", newTimer )
+			end
 		end )
 	end
 end
