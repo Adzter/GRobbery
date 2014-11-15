@@ -13,6 +13,7 @@ function ENT:Initialize()
 	
 	self:SetNWBool( "isDrilling", false )
 	self:SetNWInt( "drillTimer", drillConfig.duration )
+	self:SetNWBool( "isJammed", false )
 end
  
 function ENT:Use( activator, caller )
