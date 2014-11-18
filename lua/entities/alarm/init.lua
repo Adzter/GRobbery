@@ -11,9 +11,6 @@ function ENT:Initialize()
 	self:SetMoveType( MOVETYPE_NONE )
 end
  
-function ENT:Use( activator, caller )
-end
-
 robberyAlarm = false
 function ENT:Think()
 	if robberyAlarm then
