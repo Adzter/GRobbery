@@ -21,6 +21,9 @@ function ENT:Touch( entity )
 		local drillSounds = CreateSound( self, "npigamers/drill.wav" )
 		drillSounds:Play()
 		
+		--Enable the alarm
+		robberyAlarm = true
+		
 		--Set the networked variable isDrilling to true
 		entity:SetNWBool( "isDrilling", true )
 		

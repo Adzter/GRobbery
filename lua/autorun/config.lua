@@ -41,8 +41,9 @@ cabinetConfig.models = {
 	"models/props_wasteland/controlroom_storagecloset001b.mdl" -- Last one shouldn't have a comma
 }
 cabinetConfig.rewards = {
-	"weapon_crowbar",
-	"weapon_ar2",
-	"weapon_pistol" -- Last one shouldn't have a comma
+	"weapon_l85",
+	"weapon_lockpick",
+	"weapon_proxy_mine",
+	"weapon_unarrest_stick" -- Last one shouldn't have a comma
 }
 cabinetConfig.rewardsAmount = 2 
