@@ -22,7 +22,9 @@ function ENT:Touch( entity )
 		drillSounds:Play()
 		
 		--Enable the alarm
-		robberyAlarm = true
+		for k,v in pairs( ents.FindByClass("alarm")) do
+			v:EnableAlarm()
+		end
 		
 		--Set the networked variable isDrilling to true
 		entity:SetNWBool( "isDrilling", true )
