@@ -11,7 +11,7 @@ cabinetConfig = {}
                                             
 --]]
 
-drillConfig.duration = 360
+drillConfig.duration = 2
 drillConfig.enableJamming = true      -- Enables/disables the jamming of the drill
 drillConfig.drillingText = "DRILLING" -- Text to show when drilling
 drillConfig.errorText = "ERROR: JAM"  -- Text to show when the drill gets stuck
@@ -40,10 +40,15 @@ cabinetConfig.models = {
 	"models/props_wasteland/controlroom_storagecloset001a.mdl",
 	"models/props_wasteland/controlroom_storagecloset001b.mdl" -- Last one shouldn't have a comma
 }
+
+-- Money is in the format:
+-- {"money", minAmount, maxAmount }
 cabinetConfig.rewards = {
-	"weapon_l85",
-	"weapon_lockpick",
-	"weapon_proxy_mine",
-	"weapon_unarrest_stick" -- Last one shouldn't have a comma
+	--"weapon_l85",
+	"lockpick",
+	"cw_ak74",
+	--"weapon_proxy_mine",
+	{"money", 450, 750},
+	"unarrest_stick" -- Last one shouldn't have a comma
 }
 cabinetConfig.rewardsAmount = 2 
