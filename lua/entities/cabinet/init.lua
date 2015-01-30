@@ -3,8 +3,6 @@ AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
  
 include('shared.lua')
 
-local inProgress = false
-
 function ENT:Initialize()
 	self:SetModel( table.Random(cabinetConfig.models) )
 	self:PhysicsInit( SOLID_VPHYSICS )
@@ -12,20 +10,31 @@ function ENT:Initialize()
 	-- disable the movement of the entity
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetUseType( SIMPLE_USE )
+	self.inProgress = false
+	self.cooldown = 0
+	timer.Create( "cooldownCheck" .. self:EntIndex(), 1, 0, function() 
+		if CurTime() > self.cooldown then
+			self:SetColor( cabinetConfig.defaultColor )
+		end
+	end )
 end
 
+
+
 function ENT:Touch( entity )
-	if inProgress then return end
+	if CurTime() < self.cooldown then return end
+	if self.inProgress then return end
+	
+	self.cooldown = CurTime() + drillConfig.duration + drillConfig.cooldown
 	
 	if entity:GetClass() == "drill" and not entity:GetNWBool( "isDrilling" ) then
-		inProgress = true
 
 		entity:SetPos( self:LocalToWorld( Vector(14, 0, 0) ) )
 		entity:SetAngles( self:GetAngles() )
 		entity:SetMoveType( MOVETYPE_NONE )
 		
-		local drillSounds = CreateSound( self, "npigamers/drill.wav" )
-		drillSounds:Play()
+		self.drillSounds = CreateSound( self, "npigamers/drill.wav" )
+		self.drillSounds:Play()
 		
 		--Enable the alarm
 		for k,v in pairs( ents.FindByClass("alarm")) do
@@ -33,15 +42,15 @@ function ENT:Touch( entity )
 		end
 		
 		--Make sure we can't have any more on the same drill
-		inProgress = true
+		self.inProgress = true
 		
 		--Set the networked variable isDrilling to true
 		entity:SetNWBool( "isDrilling", true )
 		
-		timer.Create( "countdown" .. entity:EntIndex(), 1, 0, function() 
+		timer.Create( "countdown" .. self:EntIndex(), 1, 0, function() 
 			--Check if timer is less than 1, if it is then the drill is finished
 			if not entity:GetNWBool( "isJammed" ) then
-				if entity:GetNWInt( "drillTimer" ) < 1 then
+				if entity:GetNWInt( "drillTimer" ) < 1 and entity:IsValid() then
 				
 					local explode = ents.Create( "env_explosion" ) -- creates the explosion
 					explode:SetPos( self:GetPos() )
@@ -66,16 +75,22 @@ function ENT:Touch( entity )
 							end
 						end
 					
-						drillSounds:Stop()
-						inProgress = false
+						self.drillSounds:Stop()
+						self.inProgress = false
 						
-						-- kill the timer and remove the drill
-						timer.Destroy( "countdown" .. entity:EntIndex() )
+						-- kill the timer, remove the drill, disable alarms
+						for k,v in pairs( ents.FindByClass("alarm")) do
+							v:DisableAlarm()
+						end
+						
+						timer.Destroy( "countdown" .. self:EntIndex() )
 						entity:Remove()
+						
+						self:SetColor( cabinetConfig.cooldownColor )
 					end)
 				end
 		
-				if entity then
+				if entity:IsValid() then
 					local effectdata = EffectData()
 					effectdata:SetOrigin( entity:GetPos() )
 					effectdata:SetMagnitude( 3 )
@@ -84,6 +99,15 @@ function ENT:Touch( entity )
 
 					local newTimer = entity:GetNWInt( "drillTimer" ) - 1
 					entity:SetNWInt( "drillTimer", newTimer )
+				else
+					-- If the entity doesn't exist then disable everything
+					for k,v in pairs( ents.FindByClass("alarm")) do
+						v:DisableAlarm()
+					end
+					self.inProgress = false
+					self.drillSounds:Stop()
+					timer.Destroy( "countdown" .. self:EntIndex() )
+					self:SetColor( cabinetConfig.cooldownColor )
 				end
 			end
 		end )

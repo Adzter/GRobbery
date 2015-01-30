@@ -11,10 +11,12 @@ cabinetConfig = {}
                                             
 --]]
 
-drillConfig.duration = 2
+drillConfig.duration = 180
 drillConfig.enableJamming = true      -- Enables/disables the jamming of the drill
 drillConfig.drillingText = "DRILLING" -- Text to show when drilling
 drillConfig.errorText = "ERROR: JAM"  -- Text to show when the drill gets stuck
+drillConfig.health = 500			  -- How much damage the drill can take
+drillConfig.cooldown = 1800
 
 drillConfig.backgroundColor = Color(50, 90, 255, 50 ) -- In the format Red/Green/Blue/Alpha
 drillConfig.progressBarColor = Color(255, 255, 25, 255 ) -- In the format Red/Green/Blue/Alpha
@@ -41,14 +43,21 @@ cabinetConfig.models = {
 	"models/props_wasteland/controlroom_storagecloset001b.mdl" -- Last one shouldn't have a comma
 }
 
+-- Color of the cabinet when it's on cooldown
+cabinetConfig.cooldownColor = Color( 255, 50, 50 )
+-- Default color of the cabinet
+cabinetConfig.defaultColor = Color( 255, 255, 255 )
+
 -- Money is in the format:
 -- {"money", minAmount, maxAmount }
 cabinetConfig.rewards = {
 	--"weapon_l85",
 	"lockpick",
-	"cw_ak74",
 	--"weapon_proxy_mine",
-	{"money", 450, 750},
+	{"money", 5000, 20000},
+	{"money", 5000, 20000},
+	"stunstick",
+	--"m9k_spas12",
 	"unarrest_stick" -- Last one shouldn't have a comma
 }
-cabinetConfig.rewardsAmount = 2 
+cabinetConfig.rewardsAmount = 2

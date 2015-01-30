@@ -15,12 +15,12 @@ function ENT:Think()
 end
 
 function ENT:EnableAlarm()
-	local drillSounds = CreateSound( self, "ambient/alarms/alarm1.wav" )
-	drillSounds:Play()
+	self.drillSounds = CreateSound( self, "ambient/alarms/alarm1.wav" )
+	self.drillSounds:Play()
 end
 
 function ENT:DisableAlarm()
-	drillSounds:Stop()
+	self.drillSounds:Stop()
 end
 
 robberyAlarm = false
