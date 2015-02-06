@@ -8,3 +8,7 @@ ENT.Purpose= ""
 ENT.Instructions= ""
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
+
+hook.Add("AllowPlayerPickup", "allowDrillPickup", function( ply, ent )
+	if ent:GetClass() == "drill" then return true end
+end)

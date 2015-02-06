@@ -18,6 +18,7 @@ function ENT:Initialize()
 end
  
 function ENT:Use( activator, caller )
+	activator:PickupObject( self )
 end
 
 function ENT:Think()

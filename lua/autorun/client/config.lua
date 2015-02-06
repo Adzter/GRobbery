@@ -1,3 +1,5 @@
+AddCSLuaFile()
+
 drillConfig = {}
 cabinetConfig = {}
 
@@ -16,7 +18,7 @@ drillConfig.enableJamming = true      -- Enables/disables the jamming of the dri
 drillConfig.drillingText = "DRILLING" -- Text to show when drilling
 drillConfig.errorText = "ERROR: JAM"  -- Text to show when the drill gets stuck
 drillConfig.health = 500			  -- How much damage the drill can take
-drillConfig.cooldown = 1800
+drillConfig.cooldown = 1200
 
 drillConfig.backgroundColor = Color(50, 90, 255, 50 ) -- In the format Red/Green/Blue/Alpha
 drillConfig.progressBarColor = Color(255, 255, 25, 255 ) -- In the format Red/Green/Blue/Alpha
@@ -61,3 +63,10 @@ cabinetConfig.rewards = {
 	"unarrest_stick" -- Last one shouldn't have a comma
 }
 cabinetConfig.rewardsAmount = 2
+
+-- Type getpos in console to get the spawn points
+cabinetConfig.spawns = {
+	{ Vector(-1800.393433, -284.331299, -152 ), Angle( 0, -180, 0 ) },
+	{ Vector(-1799.520142, -371.193665, -152 ), Angle( 0, -180, 0 ) },
+	{ Vector(-2000.507202, -320.545685, -152 ), Angle( 0, 0, 0 ) }
+}
