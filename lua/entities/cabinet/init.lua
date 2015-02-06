@@ -19,10 +19,7 @@ function ENT:Initialize()
 	end )
 end
 
-function ENT:Touch( entity )
-	print( CurTime() - self.cooldown )
-	print( self.inProgress )
-	
+function ENT:Touch( entity )	
 	if CurTime() < self.cooldown then return end
 	if self.inProgress then return end
 	
